@@ -29,3 +29,6 @@ let one = SerialNumber(1u8);
 assert_eq!(0u8, one + 255u8);
 assert!(zero > 255u8);
 ```
+
+
+[rfc-1982]: https://tools.ietf.org/html/rfc1982
