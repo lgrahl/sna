@@ -1,0 +1,6 @@
+[package]
+name = "sna"
+version = "0.1.0"
+authors = ["Lennart Grahl <lennart.grahl@gmail.com>"]
+
+[dependencies]
