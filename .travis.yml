@@ -1,0 +1,43 @@
+# Use container system
+sudo: false
+
+# Build matrix
+language: rust
+rust:
+  - stable
+  - beta
+  - nightly
+os:
+  - linux
+
+# Dependencies
+addons:
+  apt:
+    packages:
+      - binutils-dev
+      - libcurl4-openssl-dev
+      - libdw-dev
+      - libelf-dev
+      - libiberty-dev
+      - zlib1g-dev
+
+# Build & test
+script:
+  - cargo build
+  - cargo test
+
+# Code coverage
+after_success:
+  - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+  - tar xzf master.tar.gz
+  - cd kcov-master && mkdir build && cd build
+  - cmake ..
+  - make && make install DESTDIR=../../kcov-build
+  - cd ../.. && rm -rf kcov-master
+  - export PATH=$PWD/kcov-build/usr/local/bin:$PATH
+  - >
+    for file in target/debug/sna-*[^\.d]; do
+      mkdir -p "target/cov/$(basename $file)" || travis_terminate 1;
+      kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file" || travis_terminate 1;
+    done
+  - bash <(curl -s https://codecov.io/bash)

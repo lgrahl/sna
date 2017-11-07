@@ -1,6 +1,16 @@
 [package]
 name = "sna"
+description = "Serial Number Arithmetic (RFC 1982) for Rust"
 version = "0.1.0"
 authors = ["Lennart Grahl <lennart.grahl@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/lgrahl/sna"
+keywords = ["serial", "number", "arithmetic", "rfc-1982"]
+exclude = [".travis.yml", "appveyor.yml"]
+
+[badges]
+appveyor = { repository = "lgrahl/sna" }
+codecov = { repository = "lgrahl/sna" }
+travis-ci = { repository = "lgrahl/sna" }
 
 [dependencies]
