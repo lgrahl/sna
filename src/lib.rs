@@ -415,4 +415,10 @@ mod tests {
         assert!(SerialNumber(0u8) > 200);
         assert!(SerialNumber(44u8) > 200);
     }
+
+    #[test]
+    fn fmt() {
+        assert_eq!(format!("{}", SerialNumber(33u8)), "33");
+        assert_eq!(format!("{:?}", SerialNumber(33u8)), "33");
+    }
 }
