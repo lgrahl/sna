@@ -7,6 +7,7 @@ use std::num::Wrapping;
 /// [RFC 1982](https://tools.ietf.org/html/rfc1982).
 ///
 /// There are only two operations:
+///
 /// * `+` will apply addition of a positive integer modulo the largest
 ///   representable number of this type (e.g. it will *wrap* when
 ///   overflowing).
