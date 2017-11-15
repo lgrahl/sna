@@ -14,3 +14,7 @@ codecov = { repository = "lgrahl/sna" }
 travis-ci = { repository = "lgrahl/sna" }
 
 [dependencies]
+clippy = {version = "0.0.171", optional = true}
+
+[features]
+default = []
