@@ -30,39 +30,46 @@ use std::num::Wrapping;
 /// assert!(zero > 255u8);
 /// ```
 #[derive(PartialEq, Clone, Copy, Hash)]
-pub struct SerialNumber<T>(pub T); // TODO: Can we limit this to the types defined below?
+pub struct SerialNumber<T: SerialNumberType>(pub T);
 
-impl<T: fmt::Debug> fmt::Debug for SerialNumber<T> {
+// constrain types to only types defined below
+pub trait SerialNumberType {}
+impl SerialNumberType for u8 {}
+impl SerialNumberType for u16 {}
+impl SerialNumberType for u32 {}
+impl SerialNumberType for u64 {}
+
+impl<T: fmt::Debug + SerialNumberType> fmt::Debug for SerialNumber<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.0.fmt(f)
     }
 }
 
-impl<T: fmt::Display> fmt::Display for SerialNumber<T> {
+impl<T: fmt::Display + SerialNumberType> fmt::Display for SerialNumber<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.0.fmt(f)
     }
 }
 
-impl<T: fmt::Binary> fmt::Binary for SerialNumber<T> {
+impl<T: fmt::Binary + SerialNumberType> fmt::Binary for SerialNumber<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.0.fmt(f)
     }
 }
 
-impl<T: fmt::Octal> fmt::Octal for SerialNumber<T> {
+impl<T: fmt::Octal + SerialNumberType> fmt::Octal for SerialNumber<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.0.fmt(f)
     }
 }
 
-impl<T: fmt::LowerHex> fmt::LowerHex for SerialNumber<T> {
+impl<T: fmt::LowerHex + SerialNumberType> fmt::LowerHex for SerialNumber<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.0.fmt(f)
     }
 }
 
-impl<T: fmt::UpperHex> fmt::UpperHex for SerialNumber<T> {
+impl<T: fmt::UpperHex + SerialNumberType> fmt::UpperHex for SerialNumber<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.0.fmt(f)
     }
